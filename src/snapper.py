@@ -97,7 +97,7 @@ class Backup:
         file_path = os.path.join(backup_base, f"{service_name}.sql")
 
         args = self.exec_base + [
-            "mysqldump", "-u", "root", f"-p{root_pw}", "--all-databases"
+            "mariadb-dump", "-u", "root", f"-p{root_pw}", "--all-databases"
         ]
         with open(file_path, "w", encoding="utf-8") as outfile:
             subprocess.run(args, stdout=outfile, check=True)
