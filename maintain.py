@@ -27,9 +27,10 @@ def print_environ(config):
       {config.get('username')} ({config.get('uid')}/{config.get('gid')}) on host [{config.get('hostname')}]
     """)
     if config.get("bucket_name"):
-        print(f"""bucket:
-            - {config.get('bucket_name')}
-        """)
+        print(f"""
+    bucket:
+        - {config.get('bucket_name')}
+    """)
 
 
 def main():
