@@ -1,5 +1,7 @@
 # personal
 .vscode/
+.venv
+.env
 
 # python testing cache
 __pycache__

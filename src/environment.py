@@ -27,4 +27,8 @@ def read_environ():
         "gid": int(os.environ.get("SUDO_GID")),
         "username": username,
         "hostname": os.uname().nodename or "host",
+        "aws_access_key_id": os.environ.get("AWS_ACCESS_KEY_ID"),
+        "aws_secret_access_key": os.environ.get("AWS_SECRET_ACCESS_KEY"),
+        "endpoint_url": os.environ.get("ENDPOINT_URL"),
+        "bucket_name": os.environ.get("BUCKET_NAME"),
     }

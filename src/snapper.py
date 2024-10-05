@@ -142,6 +142,7 @@ class Backup:
                 shutil.copyfileobj(f_in, f_out)
 
         os.remove(self.file_path)
+        return new_path
 
 
 def take_snapshot(config):
@@ -150,4 +151,6 @@ def take_snapshot(config):
     backup = Backup(compose, config=config)
     backup.backup_folder()
     backup.backup_database()
-    backup.compress()
+    archive_path = backup.compress()
+
+    return archive_path
