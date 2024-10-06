@@ -31,6 +31,7 @@ class S3Handler:
 
     def upload_file(self, file_path: Path):
         """upload file to bucket"""
+        print(f"upload {file_path.name} to s3 bucket")
         bucket = self.get_bucket()
         bucket.upload_file(file_path, file_path.name)
 
