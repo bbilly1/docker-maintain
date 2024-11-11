@@ -53,9 +53,9 @@ class S3Handler:
     def rotate_bucket(self):
         """rotate files in bucket"""
         bucket = self.get_bucket()
-        bucket_items = list(bucket.objects.all())
+        bucket_items = list(bucket.objects.filter(Prefix=f'docker_{self.config["hostname"]}'))
         sorted_bucket_items = sorted(bucket_items, key=lambda obj: obj.last_modified, reverse=True)
-        objects_to_delete = [obj for obj in sorted_bucket_items[5:]]
+        objects_to_delete = list(sorted_bucket_items[5:])
         if objects_to_delete:
             delete_keys = [{"Key": obj.key} for obj in objects_to_delete]
             try:
