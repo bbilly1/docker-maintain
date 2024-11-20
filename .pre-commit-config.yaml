@@ -1,10 +1,10 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: end-of-file-fixer
   - repo: https://github.com/psf/black
-    rev: 24.8.0
+    rev: 24.10.0
     hooks:
       - id: black
         alias: python
@@ -15,18 +15,17 @@ repos:
       - id: isort
         name: isort (python)
         alias: python
-        args: ["--profile", "black", "-l 79"]
+        args: ["--profile", "black", "-l 120"]
   - repo: https://github.com/pycqa/flake8
     rev: 7.1.1
     hooks:
       - id: flake8
         alias: python
-        args: [ "--max-complexity=10", "--max-line-length=79" ]
+        args: [ "--max-complexity=10", "--max-line-length=120" ]
   - repo: https://github.com/codespell-project/codespell
     rev: v2.3.0
     hooks:
       - id: codespell
-        exclude: ^frontend/package-lock.json
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: 'v4.0.0-alpha.8'
     hooks:
