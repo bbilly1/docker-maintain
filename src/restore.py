@@ -24,6 +24,7 @@ class Restore:
         """restore file"""
         tar_gz_path = Path(self.config["backup_base"]) / selected_backup_file
         extract_to = Path(self.config["docker_base"]).parent
+        print(f"Restore archive to: {str(extract_to)}")
         with tarfile.open(tar_gz_path, "r:gz") as tar:
             members = [
                 member for member in tar.getmembers()
