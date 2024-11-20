@@ -9,10 +9,11 @@ load_dotenv()
 from src.environment import read_environ
 from src.update import Containers
 from src.snapper import take_snapshot
+from src.restore import Restore
 
 
 TITLE = """\n================ DOCKER MAINTAIN ================"""
-HELP = "valid arguments are update | snapshot | help"
+HELP = "valid arguments are update | snapshot | restore | help"
 
 def print_environ(config):
     """pritty print environment"""
@@ -46,6 +47,8 @@ def main():
         Containers(config=config).update()
     elif arg == "snapshot":
         take_snapshot(config=config)
+    elif arg == "restore":
+        Restore(config).process()
     else:
         print(HELP)
 

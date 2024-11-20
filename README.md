@@ -5,10 +5,13 @@ Collection of maintenance scripts for my docker VPS servers.
 - Easy volume snapshots for Docker container.
 - Dump *mariadb* and *postgres* databases to sql files.
 - Pack it all up into a compressed tar.gz file for further archiving.
+- Optionally sync the archive file to a S3 bucket
+- Optionally rotate backup files
 
 ## Command line arguents
 - **update**: Update all containers
 - **snapshot**: Create snapshot of volumes and database containers
+- **restore**: Restore a local or S3 backup file
 
 ## Config
 You can configure the behaviour by creating a `.env` file in the root of this project. Take a look at the `.sample.env` file for an overview. Supported variables:

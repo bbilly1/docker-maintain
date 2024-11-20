@@ -44,7 +44,7 @@ class Backup:
     """handle backups for mariadb and postgres"""
 
     def __init__(self, compose, config):
-        self.services = compose["services"]
+        self.services = compose.get("services")
         self.config = config
         self.file_path = self.build_tar_path()
         self.exec_base = False
@@ -68,6 +68,9 @@ class Backup:
 
     def backup_database(self):
         """backup all databases"""
+        if not self.services:
+            raise ValueError("no services defined in compose")
+
         for service_name, service_conf in self.services.items():
             image = service_conf.get("image")
             if not image:

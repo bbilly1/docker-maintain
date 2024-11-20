@@ -77,3 +77,10 @@ class S3Handler:
         sorted_bucket_items = sorted(bucket_items, key=lambda obj: obj.last_modified, reverse=True)
 
         return sorted_bucket_items
+
+    def download_object(self, backup_file):
+        """download remote backup file to local folder"""
+        print(f"Download backup file: {backup_file}")
+        bucket = self.get_bucket()
+        target_path = Path(self.config["backup_base"]) / backup_file
+        bucket.download_file(backup_file, target_path)
