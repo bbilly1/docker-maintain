@@ -1,5 +1,6 @@
 """upload to s3 bucket"""
 
+from os import chown
 from pathlib import Path
 import boto3
 
@@ -84,3 +85,4 @@ class S3Handler:
         bucket = self.get_bucket()
         target_path = Path(self.config["backup_base"]) / backup_file
         bucket.download_file(backup_file, target_path)
+        chown(target_path, self.config["uid"], self.config["gid"])
