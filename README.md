@@ -41,3 +41,11 @@ $HOME/backup                        <-- backup base folder
 ```
 
 Ideal companion to the **Docker Ubuntu** playbook from my [Ansible Playbooks](https://github.com/bbilly1/ansible-playbooks) collection.
+
+## Dev Setup
+
+```
+python -m venv .venv
+source .venv/bin/activate
+pre-commit install
+```
