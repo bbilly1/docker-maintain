@@ -58,11 +58,11 @@ class Restore:
         for idx, backup in enumerate(available_backups):
             print(f"[{idx}] {backup}")
 
-        to_restore = input("pick idx of backup to restore: ")
+        to_restore = input("\npick idx of backup to restore: ")
         if not to_restore.isdigit():
             raise ValueError("expected int")
 
-        selected_backup_file = available_backups[to_restore]
+        selected_backup_file = available_backups[int(to_restore)]
         return selected_backup_file
 
     def download_backup(self, selected_backup_file):
