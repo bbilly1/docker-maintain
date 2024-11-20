@@ -44,8 +44,11 @@ Ideal companion to the **Docker Ubuntu** playbook from my [Ansible Playbooks](ht
 
 ## Dev Setup
 
+Install dev requirements into virtual environment and setup pre-commit:
+
 ```
 python -m venv .venv
 source .venv/bin/activate
+pip install -r requirements-dev.txt
 pre-commit install
 ```
