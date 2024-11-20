@@ -27,7 +27,9 @@ class S3Handler:
             return
 
         self.upload_file(Path(archive_path))
-        self.rotate_bucket()
+        if self.config.get("rotate_s3"):
+            items_to_keep = int(self.config["rotate_s3"])
+            self.rotate_bucket(items_to_keep)
 
     def upload_file(self, file_path: Path):
         """upload file to bucket"""
@@ -50,12 +52,10 @@ class S3Handler:
         bucket = s3_resource.Bucket(self.config["bucket_name"])
         return bucket
 
-    def rotate_bucket(self):
+    def rotate_bucket(self, items_to_keep: int) -> None:
         """rotate files in bucket"""
-        bucket = self.get_bucket()
-        bucket_items = list(bucket.objects.filter(Prefix=f'docker_{self.config["hostname"]}'))
-        sorted_bucket_items = sorted(bucket_items, key=lambda obj: obj.last_modified, reverse=True)
-        objects_to_delete = list(sorted_bucket_items[5:])
+        sorted_bucket_items = self.get_bucket_objects()
+        objects_to_delete = list(sorted_bucket_items[items_to_keep:])
         if objects_to_delete:
             delete_keys = [{"Key": obj.key} for obj in objects_to_delete]
             try:
@@ -69,3 +69,11 @@ class S3Handler:
                 print(f"Error deleting objects: {e}")
         else:
             print("No objects to delete.")
+
+    def get_bucket_objects(self):
+        """get available backups from bucket"""
+        bucket = self.get_bucket()
+        bucket_items = list(bucket.objects.filter(Prefix=f'docker_{self.config["hostname"]}'))
+        sorted_bucket_items = sorted(bucket_items, key=lambda obj: obj.last_modified, reverse=True)
+
+        return sorted_bucket_items

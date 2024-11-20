@@ -31,4 +31,6 @@ def read_environ():
         "aws_secret_access_key": os.environ.get("AWS_SECRET_ACCESS_KEY"),
         "endpoint_url": os.environ.get("ENDPOINT_URL"),
         "bucket_name": os.environ.get("BUCKET_NAME"),
+        "rotate_s3": os.environ.get("ROTATE_S3"),
+        "rotate_local": os.environ.get("ROTATE_LOCAL"),
     }

@@ -10,6 +10,17 @@ Collection of maintenance scripts for my docker VPS servers.
 - **update**: Update all containers
 - **snapshot**: Create snapshot of volumes and database containers
 
+## Config
+You can configure the behaviour by creating a `.env` file in the root of this project. Take a look at the `.sample.env` file for an overview. Supported variables:
+
+- `AWS_ACCESS_KEY_ID`: Optional, for S3 backup
+- `AWS_SECRET_ACCESS_KEY`: Optional, for S3 backup
+- `BUCKET_NAME`: Optional, for S3 backup
+- `ENDPOINT_URL`: Optional, for S3 backup
+- `ROTATE_S3`: Optional, when using S3 backup, configure how many backup objects to keep
+- `ROTATE_LOCAL`: Optional, configure how many local tar.gz backup files to keep
+  - Outdated backups are trashed with `trash-cli`, you'll have to empty the trash yourself.
+
 ## Run
 Use sudo from your regular user, not as root, e.g.:
 ```bash

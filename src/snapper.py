@@ -2,6 +2,7 @@
 
 import gzip
 import os
+import re
 import shutil
 import subprocess
 import tarfile
@@ -144,6 +145,22 @@ class Backup:
         os.remove(self.file_path)
         return new_path
 
+    def get_available_backups(self):
+        """get available backup files"""
+        host_name = self.config["hostname"]
+        pattern = f"docker_{host_name}_" + r"[0-9]{8}.tar.gz"
+        backups = [i for i in os.listdir(self.config["backup_base"]) if re.match(pattern, i)]
+        sorted_all_files = sorted(backups, reverse=True)
+
+        return sorted_all_files
+
+    def rotate(self, items_to_keep: int) -> None:
+        """rotate local backups"""
+        sorted_all_files = self.get_available_backups()
+        backups_to_delete = list(sorted_all_files[items_to_keep:])
+        for backup_file in backups_to_delete:
+            backup_file_path = os.path.join(self.config["backup_base"], backup_file)
+            os.remove(backup_file_path)
 
 def take_snapshot(config):
     """entry point"""
@@ -152,5 +169,9 @@ def take_snapshot(config):
     backup.backup_folder()
     backup.backup_database()
     archive_path = backup.compress()
+
+    if config.get("rotate_local"):
+        items_to_keep = int(config["rotate_local"])
+        backup.rotate(items_to_keep)
 
     return archive_path
