@@ -6,8 +6,8 @@ import re
 import shutil
 import subprocess
 import tarfile
-
 from datetime import datetime
+
 import yaml
 
 from src.bucket import S3Handler

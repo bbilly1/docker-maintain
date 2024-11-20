@@ -7,10 +7,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from src.environment import read_environ
-from src.update import Containers
-from src.snapper import take_snapshot
 from src.restore import Restore
-
+from src.snapper import take_snapshot
+from src.update import Containers
 
 TITLE = """\n================ DOCKER MAINTAIN ================"""
 HELP = "valid arguments are update | snapshot | restore | help"
