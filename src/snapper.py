@@ -10,6 +10,8 @@ import tarfile
 from datetime import datetime
 import yaml
 
+from src.bucket import S3Handler
+
 
 class DockerCompose:
     """handle docker compose file"""
@@ -161,6 +163,7 @@ class Backup:
         for backup_file in backups_to_delete:
             backup_file_path = os.path.join(self.config["backup_base"], backup_file)
             os.remove(backup_file_path)
+            print(f"Deleted: {backup_file}")
 
 def take_snapshot(config):
     """entry point"""
@@ -169,6 +172,8 @@ def take_snapshot(config):
     backup.backup_folder()
     backup.backup_database()
     archive_path = backup.compress()
+
+    S3Handler(config).process(archive_path)
 
     if config.get("rotate_local"):
         items_to_keep = int(config["rotate_local"])

@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from src.bucket import S3Handler
 from src.environment import read_environ
 from src.update import Containers
 from src.snapper import take_snapshot
@@ -46,8 +45,7 @@ def main():
     if arg == "update":
         Containers(config=config).update()
     elif arg == "snapshot":
-        archive_path = take_snapshot(config=config)
-        S3Handler(config).process(archive_path)
+        take_snapshot(config=config)
     else:
         print(HELP)
 
