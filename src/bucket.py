@@ -62,8 +62,7 @@ class S3Handler:
             try:
                 s3_resource = self.get_resource()
                 response = s3_resource.meta.client.delete_objects(
-                    Bucket=self.config["bucket_name"],
-                    Delete={"Objects": delete_keys}
+                    Bucket=self.config["bucket_name"], Delete={"Objects": delete_keys}
                 )
                 print("Deleted:", response["Deleted"])
             except Exception as e:  # pylint: disable=broad-exception-caught

@@ -91,7 +91,7 @@ class Backup:
 
     def _get_maria_root_pw(self):
         """get root pw from env var"""
-        args = self.exec_base + ["bash", "-c", "echo \"$MYSQL_ROOT_PASSWORD\""]
+        args = self.exec_base + ["bash", "-c", 'echo "$MYSQL_ROOT_PASSWORD"']
         root_pw_raw = subprocess.run(args, capture_output=True, check=True)
         root_pw = root_pw_raw.stdout.decode().strip()
 
@@ -102,9 +102,7 @@ class Backup:
         backup_base = self.config["backup_base"]
         file_path = os.path.join(backup_base, f"{service_name}.sql")
 
-        args = self.exec_base + [
-            "mariadb-dump", "-u", "root", f"-p{root_pw}", "--all-databases"
-        ]
+        args = self.exec_base + ["mariadb-dump", "-u", "root", f"-p{root_pw}", "--all-databases"]
         with open(file_path, "w", encoding="utf-8") as outfile:
             subprocess.run(args, stdout=outfile, check=True)
 
@@ -120,7 +118,7 @@ class Backup:
 
     def _get_pg_user(self):
         """get username for postgress db"""
-        args = self.exec_base + ["bash", "-c", "echo \"$POSTGRES_USER\""]
+        args = self.exec_base + ["bash", "-c", 'echo "$POSTGRES_USER"']
         user_raw = subprocess.run(args, capture_output=True, check=True)
         user = user_raw.stdout.decode().strip()
 
@@ -167,6 +165,7 @@ class Backup:
             backup_file_path = os.path.join(self.config["backup_base"], backup_file)
             os.remove(backup_file_path)
             print(f"Deleted: {backup_file}")
+
 
 def take_snapshot(config):
     """entry point"""

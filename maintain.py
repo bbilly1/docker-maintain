@@ -15,22 +15,27 @@ from src.restore import Restore
 TITLE = """\n================ DOCKER MAINTAIN ================"""
 HELP = "valid arguments are update | snapshot | restore | help"
 
+
 def print_environ(config):
     """pritty print environment"""
     print(TITLE)
-    print(f"""
+    print(
+        f"""
     paths:
       - home: {config.get('home')}
       - docker: {config.get('docker_base')}
       - backup: {config.get('backup_base')}
     user:
       {config.get('username')} ({config.get('uid')}/{config.get('gid')}) on host [{config.get('hostname')}]
-    """)
+    """
+    )
     if config.get("bucket_name"):
-        print(f"""
+        print(
+            f"""
     bucket:
         - {config.get('bucket_name')}
-    """)
+    """
+        )
 
 
 def main():

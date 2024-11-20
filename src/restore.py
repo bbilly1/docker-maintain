@@ -27,8 +27,7 @@ class Restore:
         print(f"Restore archive to: {str(extract_to)}")
         with tarfile.open(tar_gz_path, "r:gz") as tar:
             members = [
-                member for member in tar.getmembers()
-                if not (member.name.endswith(".sql") and "/" not in member.name)
+                member for member in tar.getmembers() if not (member.name.endswith(".sql") and "/" not in member.name)
             ]
             tar.extractall(path=extract_to, members=members)
 
