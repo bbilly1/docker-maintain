@@ -8,7 +8,7 @@ Collection of maintenance scripts for my docker VPS servers.
 - Optionally sync the archive file to a S3 bucket
 - Optionally rotate backup files
 
-## Command line arguents
+## Command line arguments
 - **update**: Update all containers
 - **snapshot**: Create snapshot of volumes and database containers
 - **restore**: Restore a local or S3 backup file

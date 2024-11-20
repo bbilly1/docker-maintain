@@ -6,10 +6,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from src.environment import read_environ
-from src.restore import Restore
-from src.snapper import take_snapshot
-from src.update import Containers
+from src.environment import read_environ  # noqa: E402
+from src.restore import Restore  # noqa: E402
+from src.snapper import take_snapshot  # noqa: E402
+from src.update import Containers  # noqa: E402
 
 TITLE = """\n================ DOCKER MAINTAIN ================"""
 HELP = "valid arguments are update | snapshot | restore | help"

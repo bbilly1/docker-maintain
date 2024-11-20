@@ -112,12 +112,12 @@ class Backup:
         os.remove(file_path)
 
     def backup_postgres(self, service_name):
-        """make backup of postgres db"""
+        """make backup of postgresql db"""
         user = self._get_pg_user()
         self._dump_pg_db(user, service_name)
 
     def _get_pg_user(self):
-        """get username for postgress db"""
+        """get username for postgresql db"""
         args = self.exec_base + ["bash", "-c", 'echo "$POSTGRES_USER"']
         user_raw = subprocess.run(args, capture_output=True, check=True)
         user = user_raw.stdout.decode().strip()
