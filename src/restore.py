@@ -25,7 +25,11 @@ class Restore:
         tar_gz_path = Path(self.config["backup_base"]) / selected_backup_file
         extract_to = Path(self.config["docker_base"]).parent
         with tarfile.open(tar_gz_path, "r:gz") as tar:
-            tar.extractall(path=extract_to)
+            members = [
+                member for member in tar.getmembers()
+                if not (member.name.endswith(".sql") and "/" not in member.name)
+            ]
+            tar.extractall(path=extract_to, members=members)
 
     def get_backups(self):
         """get available backups"""
