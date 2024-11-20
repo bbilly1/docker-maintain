@@ -23,7 +23,7 @@ class Restore:
     def restore(self, selected_backup_file):
         """restore file"""
         tar_gz_path = Path(self.config["backup_base"]) / selected_backup_file
-        extract_to = Path(self.config["docker_base"])
+        extract_to = Path(self.config["docker_base"]).parent
         with tarfile.open(tar_gz_path, "r:gz") as tar:
             tar.extractall(path=extract_to)
 
